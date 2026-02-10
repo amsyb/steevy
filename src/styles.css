@@ -1,12 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Jersey+25&family=Lexend:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap');
+
+
+ *{
+  margin: 0;
+ }
 body {
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
+  font-family: "Jersey 25", sans-serif;
+  background: #D2D9D6;
+  width: 90%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  color: #111312;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 2rem;
+.title {
+  display: flex;
+  flex-direction: column;
+
 }
 
 textarea {
@@ -14,6 +29,7 @@ textarea {
   height: 150px;
   margin-bottom: 1rem;
   padding: 1rem;
+  background-color: #DCE2E0;
 }
 
 button {
@@ -22,8 +38,23 @@ button {
 }
 
 .output {
-  background: white;
+  background: black;
   padding: 1rem;
   margin-top: 1rem;
   white-space: pre-wrap;
+}
+
+.output-select {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: black;
+  cursor: pointer;
+}
+
+.output-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }

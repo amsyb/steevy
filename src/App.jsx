@@ -30,11 +30,15 @@ export default function App() {
 
   return (
     <div className="container">
-      <h1>AI Interview Helper</h1>
-      
+      <div className="title">
+      <h1>Steevy</h1>
+      <p>Use Steevy to help with your interview prep!</p>
 
+</div>
+<label for="resume"> Paste Resume Text </label>
       <textarea
-        placeholder="Paste Resume Text"
+      id = "resume"
+        placeholder="Add Resume"
         onChange={(e) => setResumeText(e.target.value)}
       />
 
@@ -42,16 +46,16 @@ export default function App() {
         placeholder="Paste Job Description"
         onChange={(e) => setJobAdText(e.target.value)}
       />
-
-      <select onChange={(e) => setOutputType(e.target.value)}>
+<div className="output-layout">
+      <select className="output-select" onChange={(e) => setOutputType(e.target.value)}>
         <option>Interview Notes</option>
         <option>Interview Questions</option>
-        <option>Cover Letter</option>
       </select>
 
       <button onClick={handleGenerate}>
         Generate
       </button>
+      </div>
 
       {loading ? (
         <p>Generating…</p>
