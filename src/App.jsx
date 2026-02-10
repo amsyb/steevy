@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./styles.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [resumeText, setResumeText] = useState("");
+  const [jobAdText, setJobAdText] = useState("");
+  const [outputType, setOutputType] = useState("Interview Notes");
+  const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleGenerate = async () => {
+    setLoading(true);
+
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        resumeText,
+        jobAdText,
+        outputType,
+      }),
+    });
+
+    const data = await res.json();
+    setResult(data.result);
+    setLoading(false);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="container">
+      <h1>AI Interview Helper</h1>
+      
 
-export default App
+      <textarea
+        placeholder="Paste Resume Text"
+        onChange={(e) => setResumeText(e.target.value)}
+      />
+
+      <textarea
+        placeholder="Paste Job Description"
+        onChange={(e) => setJobAdText(e.target.value)}
+      />
+
+      <select onChange={(e) => setOutputType(e.target.value)}>
+        <option>Interview Notes</option>
+        <option>Interview Questions</option>
+        <option>Cover Letter</option>
+      </select>
+
+      <button onClick={handleGenerate}>
+        Generate
+      </button>
+
+      {loading ? (
+        <p>Generating…</p>
+      ) : (
+        <pre className="output">{result}</pre>
+      )}
+    </div>
+  );
+}
